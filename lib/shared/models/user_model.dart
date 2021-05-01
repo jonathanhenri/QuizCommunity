@@ -32,7 +32,7 @@ class UserModel {
     // ignore: unnecessary_cast
     return {
       'name': this.name,
-      'photoUrl': this.photoUrl,
+      'PHOTO_URL': this.photoUrl,
       'score': this.score,
     } as Map<String, dynamic>;
   }

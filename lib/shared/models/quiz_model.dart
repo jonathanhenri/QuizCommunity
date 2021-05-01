@@ -47,6 +47,15 @@ class QuizModel {
     };
   }
 
+  Map<String, dynamic> toMapDb() {
+    return {
+      'title': title,
+      'QUESTION_ANSWERED': questionAnswered,
+      'imagem': imagem,
+      'level': level.parse,
+    };
+  }
+
   factory QuizModel.fromMap(Map<String, dynamic> map) {
     return QuizModel(
       title: map['title'],

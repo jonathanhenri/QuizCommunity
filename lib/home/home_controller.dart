@@ -1,7 +1,7 @@
 import 'package:quizcommunity/core/app_images.dart';
 import 'package:quizcommunity/home/home_repository.dart';
 import 'package:quizcommunity/home/home_start.dart';
-import 'package:quizcommunity/shared/models/awanser_model.dart';
+import 'package:quizcommunity/shared/models/awnser_model.dart';
 import 'package:quizcommunity/shared/models/question_model.dart';
 import 'package:quizcommunity/shared/models/quiz_model.dart';
 import 'package:quizcommunity/shared/models/user_model.dart';

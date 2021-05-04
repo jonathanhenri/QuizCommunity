@@ -2,18 +2,19 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quizcommunity/shared/models/question_model.dart';
 import 'package:quizcommunity/shared/models/quiz_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-class QuizDatabase {
+class QuestionDatabase {
   static final _databaseName = "quizcommunity.db";
   static final _databaseVersion = 1;
-  static final table = 'quiz';
+  static final table = 'question';
 
   // torna esta classe singleton
-  QuizDatabase._privateConstructor();
+  QuestionDatabase._privateConstructor();
 
-  static final QuizDatabase instance = QuizDatabase._privateConstructor();
+  static final QuestionDatabase instance = QuestionDatabase._privateConstructor();
 
   // tem somente uma referência ao banco de dados
   static Database? _database;
@@ -38,10 +39,7 @@ class QuizDatabase {
     await db.execute('''
           CREATE TABLE $table (
             ID INTEGER PRIMARY KEY,
-            title TEXT NOT NULL,
-            IMAGEM TEXT,
-            QUESTION_ANSWERED INTEGER NOT NULL,
-            LEVEL TEXT NOT NULL
+            title TEXT NOT NULL
           )
           ''');
   }
@@ -63,14 +61,14 @@ class QuizDatabase {
     return await db.query(table);
   }
 
-  Future<List<QuizModel>> queryAllRowsQuiz() async {
+  Future<List<QuestionModel>> queryAllRowsQuestion() async {
     Future<List<Map<String, dynamic>>> futureListMap = queryAllRows();
-    List<QuizModel> listModel = List<QuizModel>.empty();
+    List<QuestionModel> listModel = List<QuestionModel>.empty();
 
     futureListMap.then((listMap) {
       for (Map<String, dynamic> valueMap in listMap) {
-        QuizModel quizModel = QuizModel.fromMap(valueMap);
-        listModel.add(quizModel);
+        QuestionModel questionModel = QuestionModel.fromMap(valueMap);
+        listModel.add(questionModel);
       }
     });
 
@@ -116,10 +114,7 @@ class QuizDatabase {
     await db.execute('''
           CREATE TABLE $table (
             ID INTEGER PRIMARY KEY,
-            title TEXT NOT NULL,
-            IMAGEM TEXT,
-            QUESTION_ANSWERED INTEGER NOT NULL,
-            LEVEL TEXT NOT NULL
+            title TEXT NOT NULL
           )
           ''');
 

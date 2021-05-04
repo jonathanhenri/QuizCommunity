@@ -4,24 +4,6 @@ import 'package:quizcommunity/shared/models/question_model.dart';
 
 enum Level { facil, medio, dificil, perito }
 
-extension LevelStringExt on String {
-  Level get levelParse => {
-        "facil": Level.facil,
-        "medio": Level.medio,
-        "dificil": Level.dificil,
-        "perito": Level.perito,
-      }[this]!;
-}
-
-extension LevelExt on Level {
-  String get parse => {
-        Level.facil: "facil",
-        Level.medio: "medio",
-        Level.dificil: "dificil",
-        Level.perito: "perito",
-      }[this]!;
-}
-
 class QuizModel {
   final String title;
   final List<QuestionModel> questions;
@@ -72,3 +54,22 @@ class QuizModel {
   factory QuizModel.fromJson(String source) =>
       QuizModel.fromMap(json.decode(source));
 }
+
+extension LevelStringExt on String {
+  Level get levelParse => {
+    "facil": Level.facil,
+    "medio": Level.medio,
+    "dificil": Level.dificil,
+    "perito": Level.perito,
+  }[this]!;
+}
+
+extension LevelExt on Level {
+  String get parse => {
+    Level.facil: "facil",
+    Level.medio: "medio",
+    Level.dificil: "dificil",
+    Level.perito: "perito",
+  }[this]!;
+}
+

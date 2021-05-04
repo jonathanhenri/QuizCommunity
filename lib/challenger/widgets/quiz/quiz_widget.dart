@@ -1,6 +1,6 @@
 import 'package:quizcommunity/challenger/widgets/awnser/awnser_widget.dart';
 import 'package:quizcommunity/core/app_text_styles.dart';
-import 'package:quizcommunity/shared/models/awanser_model.dart';
+import 'package:quizcommunity/shared/models/awnser_model.dart';
 import 'package:quizcommunity/shared/models/question_model.dart';
 import 'package:flutter/material.dart';
 

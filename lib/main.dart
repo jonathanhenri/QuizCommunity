@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:quizcommunity/shared/models/quiz_model.dart';
+import 'package:quizcommunity/database/awanser_database.dart';
+import 'package:quizcommunity/shared/models/awnser_model.dart';
 
 import 'core/app_widget.dart';
-import 'database/quiz_database.dart';
 
 Future<void> main() async {
   runApp(AppWidget());
 
-  final dbHelper = QuizDatabase.instance;
+  final dbHelper = AwnserDatabase.instance;
 
-  dbHelper.insert(QuizModel(title: 'Primeiro Quiz', questions: [], imagem: 'imagem', level: Level.facil).toMapDb());
+  // dbHelper.DropTableIfExistsThenReCreate();
+
+  dbHelper.insert(AwnserModel(title: 'Primeira resposta').toMap());
+
+  dbHelper.queryAllRows().then((map) => print(map.toString()));
 
 }

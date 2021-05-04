@@ -12,7 +12,7 @@ class AwnserModel {
   Map<String, dynamic> toMap() {
     return {
       'title': title,
-      'isRight': isRight,
+      'is_right': isRight ? 1 : 0,
     };
   }
 

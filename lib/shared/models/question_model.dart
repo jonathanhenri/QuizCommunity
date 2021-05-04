@@ -1,18 +1,23 @@
 import 'dart:convert';
 
-import 'package:quizcommunity/shared/models/awanser_model.dart';
+import 'package:quizcommunity/shared/models/awnser_model.dart';
 
 class QuestionModel {
   final String title;
   final List<AwnserModel> awnsers;
 
-  QuestionModel({required this.title, required this.awnsers})
-      : assert(awnsers.length == 4);
+  QuestionModel({required this.title, required this.awnsers});
 
   Map<String, dynamic> toMap() {
     return {
       'title': title,
       'awnsers': awnsers.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  Map<String, dynamic> toMapDb() {
+    return {
+      'title': title
     };
   }
 

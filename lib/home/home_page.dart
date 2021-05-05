@@ -76,7 +76,8 @@ class _HomePageState extends State<HomePage> {
                                             title: e.title,
                                           )));
                             },
-                            percent: e.questionAnswered / e.questions.length,
+                            // percent: e.questionAnswered / e.questions.length,
+                            percent: 0,
                             completed:
                                 "${e.questionAnswered}/${e.questions.length}",
                           ))

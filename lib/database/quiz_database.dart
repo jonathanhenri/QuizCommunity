@@ -65,7 +65,7 @@ class QuizDatabase {
 
   Future<List<QuizModel>> queryAllRowsQuiz() async {
     Future<List<Map<String, dynamic>>> futureListMap = queryAllRows();
-    List<QuizModel> listModel = List<QuizModel>.empty();
+    List<QuizModel> listModel = [];
 
     futureListMap.then((listMap) {
       for (Map<String, dynamic> valueMap in listMap) {

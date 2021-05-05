@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:quizcommunity/database/quiz_database.dart';
 import 'package:quizcommunity/shared/models/quiz_model.dart';
 import 'package:quizcommunity/shared/models/user_model.dart';
 import 'package:flutter/services.dart';
@@ -13,10 +14,15 @@ class HomeRepository {
     return user;
   }
 
+  // Future<List<QuizModel>> getQuizzes() async {
+  //   final response = await rootBundle.loadString("assets/database/quizzes.json");
+  //   final list = jsonDecode(response) as List;
+  //   final quizzes = list.map((e) => QuizModel.fromMap(e)).toList();
+  //   return quizzes;
+  // }
+
   Future<List<QuizModel>> getQuizzes() async {
-    final response = await rootBundle.loadString("assets/database/quizzes.json");
-    final list = jsonDecode(response) as List;
-    final quizzes = list.map((e) => QuizModel.fromMap(e)).toList();
-    return quizzes;
+    final dbQuizzes = QuizDatabase.instance;
+    return dbQuizzes.queryAllRowsQuiz();
   }
 }

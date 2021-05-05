@@ -8,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 
 class AwnserDatabase {
   static final _databaseName = "quizcommunity.db";
-  static final _databaseVersion = 2;
+  static final _databaseVersion = 1;
   static final table = 'awnser';
 
   // torna esta classe singleton
@@ -22,7 +22,7 @@ class AwnserDatabase {
   Future<Database> get database async {
     if (_database != null) return _database!;
     // instancia o db na primeira vez que for acessado
-    _database = await _initDatabase();
+    _database = await initDB();
     return _database!;
   }
 
@@ -34,16 +34,34 @@ class AwnserDatabase {
         version: _databaseVersion, onCreate: _onCreate);
   }
 
+  initDB() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, _databaseName);
+    return await openDatabase(path, version: _databaseVersion, onOpen: (db) {
+    }, onCreate: (Database db, int version) async {
+      await db.execute('''
+          CREATE TABLE $table (
+            ID INTEGER PRIMARY KEY,
+            title TEXT NOT NULL,
+            is_right  INTEGER NOT NULL,
+            ID_QUESTION INTEGER NOT NULL
+          )
+          ''');
+    });
+  }
+
   // Código SQL para criar o banco de dados e a tabela
   Future _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE $table (
             ID INTEGER PRIMARY KEY,
             title TEXT NOT NULL,
-            is_right  INTEGER
+            is_right  INTEGER NOT NULL,
+            ID_QUESTION INTEGER NOT NULL
           )
           ''');
   }
+
 
   // métodos Helper
   //----------------------------------------------------
@@ -100,7 +118,7 @@ class AwnserDatabase {
     return await db.delete(table, where: 'ID = ?', whereArgs: [id]);
   }
 
-  Future<void> DropTableIfExistsThenReCreate() async {
+  Future<void> dropTableIfExistsThenReCreate() async {
 
     //here we get the Database object by calling the openDatabase method
     //which receives the path and onCreate function and all the good stuff
@@ -116,9 +134,9 @@ class AwnserDatabase {
           CREATE TABLE $table (
             ID INTEGER PRIMARY KEY,
             title TEXT NOT NULL,
-            is_right  INTEGER
+            is_right  INTEGER NOT NULL,
+            ID_QUESTION INTEGER NOT NULL
           )
           ''');
-
   }
 }

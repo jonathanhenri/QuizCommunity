@@ -1,12 +1,17 @@
 import 'dart:convert';
 
 import 'package:quizcommunity/shared/models/awnser_model.dart';
+import 'package:quizcommunity/shared/models/quiz_model.dart';
 
 class QuestionModel {
   final String title;
   final List<AwnserModel> awnsers;
+  int? id;
+  QuizModel? quizModel;
 
-  QuestionModel({required this.title, required this.awnsers});
+
+
+  QuestionModel({required this.title, required this.awnsers,this.id, this.quizModel});
 
   Map<String, dynamic> toMap() {
     return {
@@ -17,7 +22,8 @@ class QuestionModel {
 
   Map<String, dynamic> toMapDb() {
     return {
-      'title': title
+      'title': title,
+      'id_quiz': quizModel != null ? quizModel!.id: 0
     };
   }
 

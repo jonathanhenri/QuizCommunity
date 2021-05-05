@@ -101,7 +101,7 @@ class QuizDatabase {
     return await db.delete(table, where: 'ID = ?', whereArgs: [id]);
   }
 
-  Future<void> DropTableIfExistsThenReCreate() async {
+  Future<void> dropTableIfExistsThenReCreate() async {
 
     //here we get the Database object by calling the openDatabase method
     //which receives the path and onCreate function and all the good stuff

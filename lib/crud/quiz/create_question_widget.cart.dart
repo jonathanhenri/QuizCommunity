@@ -4,19 +4,21 @@ class CreateAwanserWidget extends StatelessWidget {
   final bool isRight;
   final String title;
   final String hintText;
+  final TextEditingController controller;
 
   CreateAwanserWidget({
     required this.title,
     this.isRight = false,
     required this.hintText,
+    required this.controller,
   });
 
-  CreateAwanserWidget.isRight({required String title})
+  CreateAwanserWidget.isRight({required String title, required this.controller})
       : this.title = title,
         this.isRight = true,
         this.hintText = "Resposta Correta";
 
-  CreateAwanserWidget.isWrong({required String title})
+  CreateAwanserWidget.isWrong({required String title, required this.controller})
       : this.title = title,
         this.isRight = false,
         this.hintText = "Resposta Errada";
@@ -37,6 +39,7 @@ class CreateAwanserWidget extends StatelessWidget {
           labelText: title,
           hintText: hintText,
         ),
+        controller: controller,
       ),
     );
   }

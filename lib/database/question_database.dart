@@ -39,9 +39,11 @@ class QuestionDatabase {
     await db.execute('''
           CREATE TABLE $table (
             ID INTEGER PRIMARY KEY,
-            title TEXT NOT NULL
+            title TEXT NOT NULL,
+            ID_QUIZ INTEGER NOT NULL
           )
           ''');
+
   }
 
   // métodos Helper
@@ -99,7 +101,7 @@ class QuestionDatabase {
     return await db.delete(table, where: 'ID = ?', whereArgs: [id]);
   }
 
-  Future<void> DropTableIfExistsThenReCreate() async {
+  Future<void> dropTableIfExistsThenReCreate() async {
 
     //here we get the Database object by calling the openDatabase method
     //which receives the path and onCreate function and all the good stuff
@@ -114,7 +116,8 @@ class QuestionDatabase {
     await db.execute('''
           CREATE TABLE $table (
             ID INTEGER PRIMARY KEY,
-            title TEXT NOT NULL
+            title TEXT NOT NULL,
+            ID_QUIZ INTEGER NOT NULL
           )
           ''');
 

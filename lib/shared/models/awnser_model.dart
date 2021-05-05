@@ -1,18 +1,23 @@
 import 'dart:convert';
 
+import 'package:quizcommunity/shared/models/question_model.dart';
+
 class AwnserModel {
   final String title;
   final bool isRight;
+  QuestionModel? questionModel;
 
   AwnserModel({
     required this.title,
     this.isRight = false,
+    this.questionModel,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'title': title,
       'is_right': isRight ? 1 : 0,
+      'ID_QUESTION': questionModel != null ? questionModel!.id : 0,
     };
   }
 

@@ -10,6 +10,9 @@ class QuizModel {
   final int questionAnswered;
   final String imagem;
   final Level level;
+  int? id;
+
+
 
   QuizModel({
     required this.title,
@@ -17,6 +20,7 @@ class QuizModel {
     this.questionAnswered = 0,
     required this.imagem,
     required this.level,
+    this.id,
   });
 
   Map<String, dynamic> toMap() {

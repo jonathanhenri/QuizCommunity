@@ -99,4 +99,27 @@ class UsuarioDatabase {
     Database db = await instance.database;
     return await db.delete(table, where: 'ID = ?', whereArgs: [id]);
   }
+
+  Future<void> dropTableIfExistsThenReCreate() async {
+
+    //here we get the Database object by calling the openDatabase method
+    //which receives the path and onCreate function and all the good stuff
+    Database db = await instance.database;
+
+    //here we execute a query to drop the table if exists which is called "tableName"
+    //and could be given as method's input parameter too
+    await db.execute("DROP TABLE IF EXISTS $table");
+
+    //and finally here we recreate our beloved "tableName" again which needs
+    //some columns initialization
+    await db.execute('''
+          CREATE TABLE $table (
+            ID INTEGER PRIMARY KEY,
+            NAME TEXT NOT NULL,
+            PHOTO_URL TEXT,
+            SCORE INTEGER NOT NULL
+          )
+          ''');
+
+  }
 }

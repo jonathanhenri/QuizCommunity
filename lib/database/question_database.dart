@@ -63,9 +63,30 @@ class QuestionDatabase {
     return await db.query(table);
   }
 
+  // Todas as linhas são retornadas como uma lista de mapas, onde cada mapa é
+  // uma lista de valores-chave de colunas.
+  Future<List<Map<String, dynamic>>> queryRowsPorQuiz(int idQuiz) async {
+    Database db = await instance.database;
+    return await db.rawQuery('SELECT * FROM $table where ID_QUIZ = $idQuiz');
+  }
+
+  Future<List<QuestionModel>> queryRowsQuestionPorQuiz(int idQuiz) async {
+    Future<List<Map<String, dynamic>>> futureListMap =  queryRowsPorQuiz(idQuiz);
+    List<QuestionModel> listModel = [];
+
+    futureListMap.then((listMap) {
+      for (Map<String, dynamic> valueMap in listMap) {
+        QuestionModel questionModel = QuestionModel.fromMap(valueMap);
+        listModel.add(questionModel);
+      }
+    });
+
+    return listModel;
+  }
+
   Future<List<QuestionModel>> queryAllRowsQuestion() async {
     Future<List<Map<String, dynamic>>> futureListMap = queryAllRows();
-    List<QuestionModel> listModel = List<QuestionModel>.empty();
+    List<QuestionModel> listModel = [];
 
     futureListMap.then((listMap) {
       for (Map<String, dynamic> valueMap in listMap) {

@@ -64,7 +64,7 @@ class UsuarioDatabase {
 
   Future<List<UserModel>> queryAllRowsUsers() async {
     Future<List<Map<String, dynamic>>> futureListMap = queryAllRows();
-    List<UserModel> listModel = List<UserModel>.empty();
+    List<UserModel> listModel = [];
 
     futureListMap.then((listMap) {
       for (Map<String, dynamic> valueMap in listMap) {

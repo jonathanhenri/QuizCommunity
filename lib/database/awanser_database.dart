@@ -82,7 +82,7 @@ class AwnserDatabase {
 
   Future<List<QuestionModel>> queryAllRowsQuestion() async {
     Future<List<Map<String, dynamic>>> futureListMap = queryAllRows();
-    List<QuestionModel> listModel = List<QuestionModel>.empty();
+    List<QuestionModel> listModel = [];
 
     futureListMap.then((listMap) {
       for (Map<String, dynamic> valueMap in listMap) {

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quizcommunity/database/question_database.dart';
 import 'package:quizcommunity/shared/models/quiz_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -67,11 +68,23 @@ class QuizDatabase {
     Future<List<Map<String, dynamic>>> futureListMap = queryAllRows();
     List<QuizModel> listModel = [];
 
-    futureListMap.then((listMap) {
+    futureListMap.then((listMap) async {
       for (Map<String, dynamic> valueMap in listMap) {
         QuizModel quizModel = QuizModel.fromMap(valueMap);
+
         listModel.add(quizModel);
       }
+    });
+
+    listModel.forEach((quiz) async {
+      listModel.remove(quiz);
+      final dbQuestion = QuestionDatabase.instance;
+      var future = await dbQuestion
+          .queryRowsQuestionPorQuiz(quiz.id!);
+
+      quiz.questions = future;
+      listModel.add(quiz);
+
     });
 
     return listModel;

@@ -6,7 +6,7 @@ enum Level { facil, medio, dificil, perito }
 
 class QuizModel {
   final String title;
-  final List<QuestionModel> questions;
+  List<QuestionModel> questions;
   final int questionAnswered;
   final String imagem;
   final Level level;
@@ -48,9 +48,10 @@ class QuizModel {
       // questions: List<QuestionModel>.from(
       //     map['questions']?.map((x) => QuestionModel.fromMap(x))),
       questions: [],
-      questionAnswered: map['questionAnswered'],
+      questionAnswered: map['QUESTION_ANSWERED'],
       imagem: map['imagem'],
       level: map['LEVEL'].toString().levelParse,
+      id: map['ID'],
     );
   }
 

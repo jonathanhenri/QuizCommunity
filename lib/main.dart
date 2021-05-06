@@ -7,6 +7,6 @@ Future<void> main() async {
   runApp(AppWidget());
 
   IniciarDatabase iniciarDatabase = new IniciarDatabase();
-  iniciarDatabase.criarTodasTabelas();
+  iniciarDatabase.mostrarTodasTabelas();
 
 }

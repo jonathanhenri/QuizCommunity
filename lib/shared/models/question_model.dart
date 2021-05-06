@@ -30,8 +30,9 @@ class QuestionModel {
   factory QuestionModel.fromMap(Map<String, dynamic> map) {
     return QuestionModel(
       title: map['title'],
-      awnsers: List<AwnserModel>.from(
-          map['awnsers']?.map((x) => AwnserModel.fromMap(x))),
+      awnsers: [],
+      // awnsers: List<AwnserModel>.from(
+      //     map['awnsers']?.map((x) => AwnserModel.fromMap(x))),
     );
   }
 
